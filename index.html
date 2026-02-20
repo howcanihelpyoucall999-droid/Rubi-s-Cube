@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My PWA App</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4CAF50">
+</head>
+
+<body style="text-align:center; font-family:sans-serif; padding-top:50px;">
+
+  <h1>My Simple PWA App 🚀</h1>
+  <p>Install this app for better experience</p>
+
+  <button id="installBtn" style="padding:12px 25px; font-size:18px; display:none;">
+    Install App
+  </button>
+
+  <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById("installBtn");
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = "inline-block";
+    });
+
+    installBtn.addEventListener("click", async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        installBtn.style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+</html>
