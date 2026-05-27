@@ -1,225 +1,1114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dream Robot | Premium Landing Page</title>
-    <style>
-        :root {
-            --brand-blue: #0033ad;
-            --glow-blue: rgba(0, 51, 173, 0.6);
-            --pure-white: #ffffff;
-            --text-main: #1a1a1a;
-            --border-width: 1.5px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Dopsbot — By Dops Machine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ── RESET & BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:#f7f8fa;
+  color:#111318;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
 
-        /* Prevent scrolling and stretching */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
+/* ── CSS VARIABLES ── */
+:root{
+  --blue:#2563eb;
+  --blue-lt:#3b82f6;
+  --white:#ffffff;
+  --offwhite:#f7f8fa;
+  --lt-gray:#eef0f5;
+  --mid-gray:#c5cad6;
+  --dark-gray:#6b7280;
+  --black:#080a0e;
+  --near-black:#111318;
+  --radius-card:26px;
+  --radius-pill:100px;
+  --shadow-sm:0 4px 16px rgba(0,0,0,0.07);
+  --shadow-md:0 10px 40px rgba(0,0,0,0.10);
+  --shadow-lg:0 20px 60px rgba(0,0,0,0.13);
+  --shadow-blue:0 8px 28px rgba(37,99,235,0.28);
+}
 
-        body, html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: var(--pure-white);
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-        }
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--black);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 0.6s ease,visibility 0.6s ease;
+}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo{
+  font-family:'Poppins',sans-serif;
+  font-weight:900;font-size:2.2rem;letter-spacing:-1px;color:#fff;
+  animation:ldPop 0.5s ease both;
+}
+.ld-logo span{color:var(--blue-lt)}
+.ld-bar{
+  width:140px;height:3px;background:rgba(255,255,255,0.1);
+  border-radius:10px;overflow:hidden;margin-top:16px;
+}
+.ld-fill{
+  height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-lt));
+  border-radius:10px;animation:ldBar 1.3s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes ldPop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes ldBar{from{width:0}to{width:100%}}
 
-        /* Full Screen Wrapper */
-        .viewport-container {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100vh;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
+/* ── NAVBAR ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 5%;
+  background:rgba(255,255,255,0.82);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.6);
+  transition:padding .3s,background .3s,box-shadow .3s;
+  will-change:transform;
+}
+nav.scrolled{
+  padding:12px 5%;
+  background:rgba(255,255,255,0.95);
+  box-shadow:0 2px 20px rgba(0,0,0,0.07);
+}
+.nav-logo{
+  font-family:'Poppins',sans-serif;
+  font-weight:900;font-size:1.45rem;letter-spacing:-0.5px;color:var(--near-black);
+}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  font-size:.86rem;font-weight:500;color:var(--dark-gray);
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--near-black)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.btn-nav{
+  padding:9px 22px;border-radius:var(--radius-pill);
+  background:var(--near-black);color:#fff;
+  font-size:.83rem;font-weight:700;
+  transition:background .2s,box-shadow .2s,transform .2s;
+}
+.btn-nav:hover{background:var(--blue);box-shadow:var(--shadow-blue);transform:translateY(-1px)}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;padding:4px;
+}
+.hamburger span{
+  display:block;width:22px;height:2px;
+  background:var(--near-black);border-radius:2px;
+  transition:all .3s;
+}
+/* Mobile menu */
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:99;
+  background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;gap:32px;
+  opacity:0;transition:opacity .3s;
+}
+.mobile-menu.open{display:flex;opacity:1}
+.mobile-menu a{
+  font-family:'Poppins',sans-serif;
+  font-size:1.5rem;font-weight:700;color:var(--near-black);
+  transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--blue)}
+.menu-close{
+  position:absolute;top:22px;right:5%;
+  font-size:1.5rem;cursor:pointer;color:var(--dark-gray);
+  transition:color .2s;
+}
+.menu-close:hover{color:var(--near-black)}
 
-        /* 1. TOP HEADER */
-        header {
-            width: 100%;
-            padding: 4vh 6vw 0 6vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-shrink: 0;
-        }
+/* ── HERO ── */
+#hero{
+  position:relative;
+  height:100svh;min-height:580px;max-height:900px;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+/* 
+  ============================================================
+  HERO BACKGROUND IMAGE
+  Replace the background-color below with:
+  background-image: url('YOUR_HERO_IMAGE.jpg');
+  ============================================================
+*/
+.hero-bg{
+  position:absolute;inset:0;
+  background-color:#c8d4e8; /* ← REPLACE WITH YOUR IMAGE */
+  /* background-image:url('hero-robot.jpg'); */
+  background-size:cover;
+  background-position:center 30%;
+  background-repeat:no-repeat;
+}
+/* Dark overlay for text readability */
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(5,8,16,0.55) 0%,
+    rgba(5,8,16,0.3) 40%,
+    rgba(5,8,16,0.65) 100%
+  );
+}
+.hero-content{
+  position:relative;z-index:2;
+  flex:1;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 6% 52px;
+  animation:heroFade .9s .2s cubic-bezier(.3,0,.2,1) both;
+}
+@keyframes heroFade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 14px;border-radius:var(--radius-pill);
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.25);
+  backdrop-filter:blur(8px);
+  font-size:.72rem;font-weight:700;letter-spacing:1px;
+  color:#fff;text-transform:uppercase;
+  margin-bottom:16px;width:fit-content;
+}
+.hero-title{
+  font-family:'Poppins',sans-serif;
+  font-weight:900;
+  font-size:clamp(3rem,12vw,5.5rem);
+  line-height:.95;letter-spacing:-2px;
+  color:#fff;
+  margin-bottom:14px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.3);
+}
+.hero-by{
+  font-size:clamp(.8rem,2.5vw,1rem);
+  font-weight:500;color:rgba(255,255,255,0.6);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.hero-tagline{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(1rem,3.5vw,1.4rem);
+  font-weight:700;color:var(--blue-lt);
+  margin-bottom:12px;
+}
+.hero-desc{
+  font-size:clamp(.85rem,2.5vw,.98rem);
+  color:rgba(255,255,255,0.72);
+  line-height:1.65;max-width:440px;
+  margin-bottom:28px;
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-hero-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 30px;border-radius:var(--radius-pill);
+  background:#fff;color:var(--near-black);
+  font-size:.9rem;font-weight:800;
+  box-shadow:0 4px 20px rgba(0,0,0,0.25);
+  transition:all .25s;
+}
+.btn-hero-primary:hover{
+  background:var(--blue);color:#fff;
+  box-shadow:var(--shadow-blue);transform:translateY(-2px);
+}
+.btn-hero-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 30px;border-radius:var(--radius-pill);
+  background:rgba(255,255,255,0.14);color:#fff;
+  border:1.5px solid rgba(255,255,255,0.3);
+  backdrop-filter:blur(8px);
+  font-size:.9rem;font-weight:700;
+  transition:all .25s;
+}
+.btn-hero-secondary:hover{
+  background:rgba(255,255,255,0.25);transform:translateY(-2px);
+}
 
-        .logo-box {
-            width: clamp(130px, 15vw, 180px);
-            aspect-ratio: 2.8 / 1;
-            border: var(--border-width) solid var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* Stats strip */
+.hero-stats-strip{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(16px);
+  border-top:1px solid rgba(255,255,255,0.6);
+}
+.hstat{
+  padding:16px 12px;text-align:center;
+  border-right:1px solid var(--lt-gray);
+}
+.hstat:last-child{border-right:none}
+.hstat-num{
+  font-family:'Poppins',sans-serif;
+  font-weight:800;font-size:1.4rem;letter-spacing:-0.8px;
+  color:var(--near-black);line-height:1;
+}
+.hstat-num b{color:var(--blue)}
+.hstat-lbl{font-size:.68rem;color:var(--dark-gray);font-weight:500;margin-top:3px}
 
-        .logo-box img {
-            max-width: 85%;
-            max-height: 85%;
-            object-fit: contain;
-        }
+/* ── SECTION COMMONS ── */
+section{padding:80px 5%}
+.sec-label{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:.7rem;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--blue);margin-bottom:12px;
+}
+.sec-label::before{
+  content:'';display:block;width:18px;height:2px;
+  background:var(--blue);border-radius:2px;
+}
+.sec-title{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:800;letter-spacing:-1.2px;
+  color:var(--near-black);line-height:1.1;margin-bottom:12px;
+}
+.sec-sub{
+  font-size:.95rem;color:var(--dark-gray);
+  line-height:1.7;max-width:480px;
+}
 
-        .menu-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: var(--border-width) solid var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            background: none;
-            cursor: pointer;
-        }
+/* ── PRODUCT SECTION ── */
+#product{background:var(--white);padding-top:80px}
+.product-wrap{
+  max-width:1060px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:52px;align-items:center;
+}
 
-        .dot { width: 4px; height: 4px; background: var(--text-main); border-radius: 50%; }
+/* Product image card */
+.prod-img-wrap{position:relative}
+/* 
+  ============================================================
+  PRODUCT IMAGE
+  The .prod-img-card shows your robot photo.
+  Replace background-color with your image or use an <img> tag.
+  ============================================================
+*/
+.prod-img-card{
+  aspect-ratio:1/1;
+  border-radius:var(--radius-card);
+  overflow:hidden;
+  background:linear-gradient(145deg,#eef2fc,#dde6f8);
+  box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+/* Placeholder label — remove when you add your image */
+.prod-img-card .img-placeholder{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  color:var(--dark-gray);text-align:center;padding:24px;
+}
+.prod-img-card .img-placeholder i{font-size:3rem;color:var(--blue);opacity:.4}
+.prod-img-card .img-placeholder p{font-size:.82rem;font-weight:600;line-height:1.5}
+/* When you add your image, replace the above with: */
+/* .prod-img-card img{width:100%;height:100%;object-fit:cover} */
 
-        /* 2. PRODUCT SECTION */
-        .product-section {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 0 6vw;
-        }
+.prod-badge-sale{
+  position:absolute;top:16px;right:16px;
+  background:var(--blue);color:#fff;
+  padding:8px 14px;border-radius:14px;
+  font-size:.75rem;font-weight:700;
+  box-shadow:var(--shadow-blue);
+}
+.prod-badge-rating{
+  position:absolute;bottom:16px;left:16px;
+  background:var(--white);
+  padding:9px 14px;border-radius:14px;
+  display:flex;align-items:center;gap:6px;
+  font-size:.8rem;font-weight:700;
+  box-shadow:var(--shadow-md);
+}
+.stars{color:#f59e0b;font-size:.7rem}
 
-        .product-box {
-            width: clamp(250px, 40vw, 420px);
-            aspect-ratio: 1.4 / 1;
-            border: var(--border-width) solid var(--text-main);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            z-index: 5;
-        }
+/* Product info */
+.price-row{
+  display:flex;align-items:baseline;gap:12px;
+  margin-bottom:18px;flex-wrap:wrap;
+}
+.price-now{
+  font-family:'Poppins',sans-serif;
+  font-size:2.4rem;font-weight:800;letter-spacing:-1.5px;
+  color:var(--near-black);
+}
+.price-was{
+  font-size:1rem;color:var(--mid-gray);
+  text-decoration:line-through;font-weight:500;
+}
+.disc-badge{
+  padding:4px 11px;border-radius:var(--radius-pill);
+  background:rgba(37,99,235,0.1);color:var(--blue);
+  font-size:.75rem;font-weight:700;
+}
+.feat-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:9px;margin:20px 0 26px;
+}
+.feat-item{
+  display:flex;align-items:center;gap:9px;
+  padding:11px 14px;border-radius:14px;
+  background:var(--offwhite);border:1px solid var(--lt-gray);
+  font-size:.81rem;font-weight:600;
+  transition:all .2s;cursor:default;
+}
+.feat-item:hover{
+  background:var(--white);
+  border-color:rgba(37,99,235,0.2);
+  box-shadow:0 4px 14px rgba(37,99,235,0.08);
+  transform:translateY(-1px);
+}
+.feat-ico{
+  width:28px;height:28px;border-radius:8px;
+  background:linear-gradient(135deg,var(--blue),var(--blue-lt));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:.67rem;flex-shrink:0;
+}
+.buy-row{display:flex;gap:11px;flex-wrap:wrap}
+.btn-buy{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:var(--radius-pill);
+  background:var(--near-black);color:#fff;
+  font-size:.88rem;font-weight:800;
+  transition:all .25s;box-shadow:0 4px 18px rgba(0,0,0,0.18);
+}
+.btn-buy:hover{
+  background:var(--blue);box-shadow:var(--shadow-blue);transform:translateY(-2px);
+}
+.btn-wish{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 24px;border-radius:var(--radius-pill);
+  background:var(--offwhite);color:var(--near-black);
+  border:1.5px solid var(--lt-gray);
+  font-size:.88rem;font-weight:700;
+  transition:all .25s;
+}
+.btn-wish:hover{
+  background:var(--white);border-color:rgba(37,99,235,0.2);
+  box-shadow:var(--shadow-sm);transform:translateY(-2px);
+}
 
-        .product-box img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
+/* ── FEATURES ── */
+#features{background:var(--offwhite)}
+.feat-section-wrap{max-width:1060px;margin:0 auto}
+.feat-section-hd{text-align:center;margin-bottom:48px}
+.feat-section-hd .sec-label{justify-content:center}
+.feat-section-hd .sec-sub{margin:0 auto}
+.feat-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.fcard{
+  background:var(--white);border-radius:var(--radius-card);
+  padding:30px 26px;border:1px solid var(--lt-gray);
+  box-shadow:var(--shadow-sm);
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.fcard::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--blue-lt));
+  opacity:0;transition:opacity .3s;
+}
+.fcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.fcard:hover::after{opacity:1}
+.fcard-ico{
+  width:48px;height:48px;border-radius:14px;
+  background:linear-gradient(135deg,#eff3ff,#dce8ff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:var(--blue);margin-bottom:16px;
+}
+.fcard-title{
+  font-family:'Poppins',sans-serif;
+  font-weight:700;font-size:1rem;margin-bottom:8px;
+}
+.fcard-desc{font-size:.86rem;color:var(--dark-gray);line-height:1.65}
 
-        /* 3. CENTERED ANIMATED WAVE (Full Width) */
-        .wave-separator {
-            width: 100vw; /* Touches both ends of the screen */
-            height: 120px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
+/* ── EXPRESSIONS ── */
+#expressions{
+  background:var(--near-black);
+  padding:80px 0;overflow:hidden;
+}
+.expr-inner{padding:0 5%;margin-bottom:44px}
+.expr-inner .sec-label{color:var(--blue-lt)}
+.expr-inner .sec-title{color:#fff}
+.expr-inner .sec-sub{color:var(--mid-gray)}
+.expr-track{
+  display:flex;gap:16px;
+  width:max-content;
+  animation:marquee 28s linear infinite;
+  will-change:transform;
+}
+.expr-track:hover{animation-play-state:paused}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+.ecard{
+  width:128px;height:128px;flex-shrink:0;
+  border-radius:22px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.09);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  transition:background .2s,transform .2s;
+  cursor:default;
+}
+.ecard:hover{
+  background:rgba(37,99,235,0.22);
+  border-color:rgba(37,99,235,0.4);
+  transform:scale(1.06);
+}
+.ecard-face{font-size:2.4rem;line-height:1}
+.ecard-lbl{
+  font-size:.67rem;font-weight:600;letter-spacing:.5px;
+  color:rgba(255,255,255,0.4);text-transform:uppercase;
+}
 
-        .wave-svg {
-            position: absolute;
-            width: 200%; /* Double width for seamless looping */
-            height: 100%;
-            animation: moveWave 5s linear infinite;
-            /* Blue glow effect */
-            filter: drop-shadow(0 0 12px var(--glow-blue));
-        }
+/* ── AI DEMO ── */
+#ai-demo{background:var(--white)}
+.ai-wrap{max-width:1060px;margin:0 auto}
+.ai-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;
+  gap:52px;align-items:start;margin-top:48px;
+}
+.ai-chat-card{
+  background:var(--offwhite);border-radius:var(--radius-card);
+  padding:24px;border:1px solid var(--lt-gray);
+  box-shadow:var(--shadow-sm);
+}
+.chat-hd{
+  display:flex;align-items:center;gap:11px;
+  padding-bottom:18px;margin-bottom:18px;
+  border-bottom:1px solid var(--lt-gray);
+}
+.chat-av{
+  width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(135deg,var(--blue),var(--blue-lt));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:.95rem;
+}
+.chat-nm{font-weight:700;font-size:.9rem}
+.chat-st{
+  font-size:.7rem;color:#22c55e;font-weight:600;
+  display:flex;align-items:center;gap:4px;
+}
+.chat-st::before{
+  content:'';width:6px;height:6px;background:#22c55e;
+  border-radius:50%;display:inline-block;
+}
+.msgs{display:flex;flex-direction:column;gap:12px}
+.msg{max-width:84%}
+.msg.bot{align-self:flex-start}
+.msg.usr{align-self:flex-end}
+.bubble{
+  padding:11px 15px;border-radius:18px;
+  font-size:.85rem;line-height:1.6;
+}
+.msg.bot .bubble{
+  background:var(--white);border:1px solid var(--lt-gray);
+  border-bottom-left-radius:5px;color:var(--near-black);
+}
+.msg.usr .bubble{
+  background:var(--near-black);color:#fff;
+  border-bottom-right-radius:5px;
+}
+.msg-t{font-size:.65rem;color:var(--mid-gray);margin-top:4px;padding:0 3px}
+.chat-inp{
+  display:flex;gap:9px;margin-top:18px;
+  padding-top:16px;border-top:1px solid var(--lt-gray);
+}
+.chat-inp input{
+  flex:1;padding:11px 16px;border-radius:var(--radius-pill);
+  background:var(--white);border:1px solid var(--lt-gray);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.84rem;color:var(--near-black);outline:none;
+}
+.chat-inp input:focus{border-color:rgba(37,99,235,.35)}
+.chat-send-btn{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--near-black);color:#fff;border:none;
+  cursor:pointer;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;flex-shrink:0;
+}
+.chat-send-btn:hover{background:var(--blue)}
+.ai-feats{display:flex;flex-direction:column;gap:12px}
+.aifeat{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px;border-radius:16px;
+  background:var(--offwhite);border:1px solid var(--lt-gray);
+  font-size:.86rem;font-weight:600;
+  transition:all .2s;
+}
+.aifeat:hover{
+  background:var(--white);
+  border-color:rgba(37,99,235,.2);
+  box-shadow:0 4px 14px rgba(37,99,235,.08);
+  transform:translateX(4px);
+}
+.aifeat .feat-ico{flex-shrink:0}
 
-        @keyframes moveWave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+/* ── REVIEWS ── */
+#reviews{background:var(--offwhite)}
+.rev-wrap{max-width:1060px;margin:0 auto}
+.rev-hd{text-align:center;margin-bottom:48px}
+.rev-hd .sec-label{justify-content:center}
+.rev-hd .sec-sub{margin:0 auto}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rcard{
+  background:var(--white);border-radius:var(--radius-card);
+  padding:26px;border:1px solid var(--lt-gray);
+  box-shadow:var(--shadow-sm);
+  transition:transform .3s,box-shadow .3s;
+}
+.rcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.rstars{color:#f59e0b;font-size:.82rem;margin-bottom:12px}
+.rtext{
+  font-size:.89rem;color:var(--dark-gray);
+  line-height:1.7;margin-bottom:18px;font-style:italic;
+}
+.rauthor{display:flex;align-items:center;gap:11px}
+.rav{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),#60a5fa);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:.82rem;flex-shrink:0;
+}
+.rname{font-weight:700;font-size:.86rem}
+.rrole{font-size:.73rem;color:var(--dark-gray)}
 
-        /* 4. BOTTOM SECTION (Headline & Button) */
-        footer {
-            width: 100%;
-            padding: 0 6vw 8vh 6vw; /* High bottom padding to push items UP */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            flex-shrink: 0;
-        }
+/* ── FAQ ── */
+#faq{background:var(--white)}
+.faq-wrap{max-width:680px;margin:0 auto}
+.faq-hd{text-align:center;margin-bottom:46px}
+.faq-hd .sec-label{justify-content:center}
+.faq-list{display:flex;flex-direction:column;gap:10px}
+.faq-item{
+  border-radius:16px;border:1px solid var(--lt-gray);
+  background:var(--offwhite);overflow:hidden;transition:border-color .3s;
+}
+.faq-item.open{border-color:rgba(37,99,235,.22);background:var(--white)}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 22px;cursor:pointer;
+  font-weight:600;font-size:.92rem;
+  transition:color .2s;gap:12px;
+}
+.faq-q:hover{color:var(--blue)}
+.faq-ico{
+  width:26px;height:26px;border-radius:8px;
+  background:var(--lt-gray);display:flex;align-items:center;
+  justify-content:center;font-size:.72rem;flex-shrink:0;
+  transition:all .3s;color:var(--dark-gray);
+}
+.faq-item.open .faq-ico{
+  background:var(--blue);color:#fff;transform:rotate(45deg);
+}
+.faq-a{
+  padding:0 22px;max-height:0;overflow:hidden;
+  font-size:.88rem;color:var(--dark-gray);line-height:1.7;
+  transition:all .35s ease;
+}
+.faq-item.open .faq-a{padding:0 22px 18px;max-height:180px}
 
-        .headline {
-            font-size: clamp(28px, 4.5vh, 48px);
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 3vh;
-            line-height: 1.1;
-        }
+/* ── FOOTER ── */
+footer{
+  background:var(--near-black);color:#fff;
+  padding:56px 5% 36px;
+}
+.ft-inner{max-width:1060px;margin:0 auto}
+.ft-top{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:40px;margin-bottom:44px;
+}
+.ft-logo{
+  font-family:'Poppins',sans-serif;
+  font-weight:900;font-size:1.5rem;letter-spacing:-.5px;
+  margin-bottom:12px;
+}
+.ft-logo span{color:var(--blue-lt)}
+.ft-desc{
+  font-size:.84rem;color:rgba(255,255,255,.42);
+  line-height:1.7;max-width:220px;margin-bottom:20px;
+}
+.soc-links{display:flex;gap:9px}
+.soc-a{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.55);font-size:.88rem;
+  transition:all .2s;
+}
+.soc-a:hover{background:var(--blue);color:#fff;transform:translateY(-2px)}
+.ft-col-ttl{
+  font-weight:700;font-size:.8rem;letter-spacing:.5px;
+  text-transform:uppercase;margin-bottom:16px;
+}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ft-links a{
+  font-size:.84rem;color:rgba(255,255,255,.4);transition:color .2s;
+}
+.ft-links a:hover{color:#fff}
+.ft-btm{
+  padding-top:26px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:.78rem;color:rgba(255,255,255,.28);flex-wrap:wrap;gap:8px;
+}
 
-        .buy-btn {
-            display: inline-block;
-            padding: clamp(14px, 2vh, 18px) clamp(45px, 8vw, 65px);
-            border: 2px solid var(--text-main);
-            border-radius: 100px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: clamp(16px, 2.2vh, 20px);
-            transition: all 0.3s ease;
-        }
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
-        .buy-btn:hover {
-            background: var(--brand-blue);
-            color: white;
-            border-color: var(--brand-blue);
-            box-shadow: 0 5px 15px var(--glow-blue);
-        }
-
-        /* Adjustments for short screens / landscape */
-        @media (max-height: 600px) {
-            .wave-separator { height: 70px; }
-            footer { padding-bottom: 4vh; }
-            header { padding-top: 2vh; }
-        }
-    </style>
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .product-wrap{grid-template-columns:1fr;gap:36px}
+  .feat-cards{grid-template-columns:1fr 1fr}
+  .rev-grid{grid-template-columns:1fr 1fr}
+  .ai-grid{grid-template-columns:1fr}
+  .ft-top{grid-template-columns:1fr 1fr;gap:28px}
+  .hero-title{font-size:clamp(2.8rem,10vw,4.5rem)}
+  .hero-stats-strip{grid-template-columns:repeat(2,1fr)}
+  .hstat:nth-child(2){border-right:none}
+  .hstat:nth-child(3){border-top:1px solid var(--lt-gray)}
+  .hstat:nth-child(4){border-top:1px solid var(--lt-gray);border-right:none}
+}
+@media(max-width:600px){
+  section{padding:64px 5%}
+  .feat-cards{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .ft-top{grid-template-columns:1fr}
+  .ft-btm{flex-direction:column;text-align:center}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .btn-hero-primary,.btn-hero-secondary{width:100%;justify-content:center}
+  .buy-row{flex-direction:column}
+  .btn-buy,.btn-wish{width:100%;justify-content:center}
+  .hstat-num{font-size:1.2rem}
+  .price-now{font-size:2rem}
+}
+</style>
 </head>
 <body>
 
-    <div class="viewport-container">
-        
-        <!-- Header -->
-        <header>
-            <div class="logo-box">
-                <img src="logo.png" alt="Logo">
-            </div>
-            <button class="menu-btn">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </button>
-        </header>
+<!-- LOADER -->
+<div id="loader">
+  <div style="display:flex;flex-direction:column;align-items:center">
+    <div class="ld-logo">Dops<span>bot</span></div>
+    <div class="ld-bar"><div class="ld-fill"></div></div>
+  </div>
+</div>
 
-        <!-- Product Display -->
-        <section class="product-section">
-            <div class="product-box">
-                <img src="product.png" alt="Robot">
-            </div>
-        </section>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="menu-close" id="menuClose"><i class="fas fa-times"></i></span>
+  <a href="#product" onclick="closeMob()">Product</a>
+  <a href="#features" onclick="closeMob()">Features</a>
+  <a href="#expressions" onclick="closeMob()">Expressions</a>
+  <a href="#reviews" onclick="closeMob()">Reviews</a>
+  <a href="#faq" onclick="closeMob()">FAQ</a>
+  <a href="#product" class="btn-nav" style="padding:14px 36px;font-size:1rem" onclick="closeMob()">Order Now</a>
+</div>
 
-        <!-- Centered, Thicker, Glowing, Infinite Running Wave -->
-        <div class="wave-separator">
-            <svg class="wave-svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
-                <!-- Two identical paths side-by-side for seamless looping -->
-                <path d="M0 50 C 200 0, 400 100, 720 50 C 1040 0, 1240 100, 1440 50 L 2880 50" 
-                      stroke="#0033ad" stroke-width="16" stroke-linecap="round" fill="none" />
-                <path d="M1440 50 C 1640 0, 1840 100, 2160 50 C 2480 0, 2680 100, 2880 50" 
-                      stroke="#0033ad" stroke-width="16" stroke-linecap="round" fill="none" />
-            </svg>
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Dops<span>bot</span></a>
+  <ul class="nav-links">
+    <li><a href="#product">Product</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#expressions">Expressions</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#product" class="btn-nav">Order Now</a>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO SECTION
+     ── HOW TO ADD YOUR HERO IMAGE ──
+     Option A (recommended): Open this file, find .hero-bg in CSS,
+     replace background-color:#c8d4e8 with:
+     background-image: url('your-image-filename.jpg');
+     and put your image file in the same folder.
+
+     Option B: Replace the <div class="hero-bg"></div> with:
+     <img src="your-image.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+═══════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <!-- 
+      ┌─────────────────────────────────────────────────────┐
+      │  PLACE YOUR HERO ROBOT PHOTO HERE                   │
+      │                                                     │
+      │  To use your image, replace this entire div with:   │
+      │  <img src="YOUR_IMAGE.jpg"                          │
+      │    style="width:100%;height:100%;                   │
+      │    object-fit:cover;object-position:center 30%;">   │
+      └─────────────────────────────────────────────────────┘
+    -->
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-chip">
+      <i class="fas fa-microchip"></i> Next-Gen Desktop AI
+    </div>
+    <div class="hero-by">By Dops Machine</div>
+    <h1 class="hero-title">DOPSBOT</h1>
+    <p class="hero-tagline">Buy your dream robot.</p>
+    <p class="hero-desc">
+      A smart emotional desktop robot with expressions, focus mode, games, and AI interactions.
+    </p>
+    <div class="hero-btns">
+      <a href="#product" class="btn-hero-primary">
+        <i class="fas fa-shopping-bag"></i> Buy Now
+      </a>
+      <a href="#ai-demo" class="btn-hero-secondary">
+        <i class="fas fa-play"></i> Watch Demo
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats-strip">
+    <div class="hstat">
+      <div class="hstat-num">40<b>+</b></div>
+      <div class="hstat-lbl">Expressions</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">8<b>+</b></div>
+      <div class="hstat-lbl">Core Modes</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">12<b>k+</b></div>
+      <div class="hstat-lbl">Happy Owners</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">4.9<b>/5</b></div>
+      <div class="hstat-lbl">Avg Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     PRODUCT SECTION
+     ── HOW TO ADD YOUR PRODUCT IMAGE ──
+     Find the <div class="prod-img-card"> below.
+     Replace the inner placeholder div with:
+     <img src="your-product-image.jpg" 
+          style="width:100%;height:100%;object-fit:cover;">
+═══════════════════════════════════════════════════════ -->
+<section id="product">
+  <div class="product-wrap reveal">
+    <div class="prod-img-wrap">
+      <div class="prod-img-card">
+        <!--
+          ┌──────────────────────────────────────────────────┐
+          │  PLACE YOUR PRODUCT ROBOT PHOTO HERE             │
+          │                                                  │
+          │  Replace this entire div.img-placeholder with:  │
+          │  <img src="YOUR_PRODUCT_IMAGE.jpg"               │
+          │    style="width:100%;height:100%;                │
+          │    object-fit:cover;">                           │
+          └──────────────────────────────────────────────────┘
+        -->
+        <div class="img-placeholder">
+          <i class="fas fa-robot"></i>
+          <p>Your product photo<br>goes here</p>
         </div>
-
-        <!-- Call to Action (Pushed Up) -->
-        <footer>
-            <h1 class="headline">Buy your Dream Robot</h1>
-            <a href="#" class="buy-btn">Buy Now</a>
-        </footer>
-
+        <div class="prod-badge-sale"><i class="fas fa-tag"></i> 32% OFF</div>
+        <div class="prod-badge-rating">
+          <span class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </span>
+          4.9 &nbsp;(2.1k)
+        </div>
+      </div>
     </div>
 
+    <div class="prod-info">
+      <div class="sec-label"><i class="fas fa-cube"></i> Product</div>
+      <h2 class="sec-title">Dopsbot<br>Desktop Edition</h2>
+      <div class="price-row">
+        <span class="price-now">&#8377;8,999</span>
+        <span class="price-was">&#8377;12,999</span>
+        <span class="disc-badge">32% OFF</span>
+      </div>
+      <p class="sec-sub">Your tiny emotional AI companion — designed for every desk, built for every mood.</p>
+      <div class="feat-grid">
+        <div class="feat-item"><div class="feat-ico"><i class="fas fa-face-smile"></i></div>40+ Expressions</div>
+        <div class="feat-item"><div class="feat-ico"><i class="fas fa-crosshairs"></i></div>Focus Mode</div>
+        <div class="feat-item"><div class="feat-ico"><i class="fas fa-clock"></i></div>Clock Mode</div>
+        <div class="feat-item"><div class="feat-ico"><i class="fas fa-gamepad"></i></div>Casual Games</div>
+        <div class="feat-item"><div class="feat-ico"><i class="fas fa-bell"></i></div>Smart Notifications</div>
+        <div class="feat-item"><div class="feat-ico"><i class="fas fa-message"></i></div>Link Messaging</div>
+        <div class="feat-item"><div class="feat-ico"><i class="fas fa-microphone"></i></div>Voice Reactions</div>
+        <div class="feat-item"><div class="feat-ico"><i class="fas fa-robot"></i></div>AI Assistant</div>
+      </div>
+      <div class="buy-row">
+        <a href="#" class="btn-buy"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+        <a href="#" class="btn-wish"><i class="fas fa-heart"></i> Wishlist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="feat-section-wrap">
+    <div class="feat-section-hd reveal">
+      <div class="sec-label"><i class="fas fa-sparkles"></i> What it does</div>
+      <h2 class="sec-title">Everything you need.<br>Nothing you don't.</h2>
+      <p class="sec-sub">Dopsbot packs a premium AI experience into an ultra-compact, emotionally-responsive form.</p>
+    </div>
+    <div class="feat-cards">
+      <div class="fcard reveal"><div class="fcard-ico"><i class="fas fa-face-grin-stars"></i></div><div class="fcard-title">Emotional Expressions</div><p class="fcard-desc">Over 40 unique animated facial expressions — Dopsbot reacts to your mood, messages, and environment in real time.</p></div>
+      <div class="fcard reveal d1"><div class="fcard-ico"><i class="fas fa-brain"></i></div><div class="fcard-title">Built-in AI Assistant</div><p class="fcard-desc">Ask it anything. Dopsbot connects to cutting-edge AI to answer questions, set reminders, and keep you productive.</p></div>
+      <div class="fcard reveal d2"><div class="fcard-ico"><i class="fas fa-eye"></i></div><div class="fcard-title">Focus Mode</div><p class="fcard-desc">Shifts into a minimal, calming state while you work — dimmed display, timer mode, and zero distractions.</p></div>
+      <div class="fcard reveal"><div class="fcard-ico"><i class="fas fa-gamepad"></i></div><div class="fcard-title">Mini Games</div><p class="fcard-desc">Take a 3-minute break with quick casual games displayed on Dopsbot's face — perfect for recharging.</p></div>
+      <div class="fcard reveal d1"><div class="fcard-ico"><i class="fas fa-wifi"></i></div><div class="fcard-title">Smart Notifications</div><p class="fcard-desc">Syncs with your phone via Bluetooth. Dopsbot physically reacts when you get messages, calls, or alerts.</p></div>
+      <div class="fcard reveal d2"><div class="fcard-ico"><i class="fas fa-plug"></i></div><div class="fcard-title">Zero-Setup Design</div><p class="fcard-desc">Plug in via USB-C, connect once via the app, and you're running. No drivers or complex setup required.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPRESSIONS -->
+<section id="expressions">
+  <div class="expr-inner">
+    <div class="sec-label"><i class="fas fa-masks-theater"></i> Expressions</div>
+    <h2 class="sec-title">Every emotion.<br>Perfectly rendered.</h2>
+    <p class="sec-sub">Explore Dopsbot's library of over 40 pixel-perfect expressions.</p>
+  </div>
+  <div style="overflow:hidden">
+    <div class="expr-track">
+      <div class="ecard"><div class="ecard-face">😊</div><div class="ecard-lbl">Happy</div></div>
+      <div class="ecard"><div class="ecard-face">😴</div><div class="ecard-lbl">Sleepy</div></div>
+      <div class="ecard"><div class="ecard-face">🤔</div><div class="ecard-lbl">Thinking</div></div>
+      <div class="ecard"><div class="ecard-face">😎</div><div class="ecard-lbl">Cool</div></div>
+      <div class="ecard"><div class="ecard-face">🥳</div><div class="ecard-lbl">Party</div></div>
+      <div class="ecard"><div class="ecard-face">😤</div><div class="ecard-lbl">Focus</div></div>
+      <div class="ecard"><div class="ecard-face">🤩</div><div class="ecard-lbl">Excited</div></div>
+      <div class="ecard"><div class="ecard-face">😌</div><div class="ecard-lbl">Calm</div></div>
+      <div class="ecard"><div class="ecard-face">😢</div><div class="ecard-lbl">Sad</div></div>
+      <div class="ecard"><div class="ecard-face">🤓</div><div class="ecard-lbl">Nerd</div></div>
+      <div class="ecard"><div class="ecard-face">😡</div><div class="ecard-lbl">Alert</div></div>
+      <div class="ecard"><div class="ecard-face">🥹</div><div class="ecard-lbl">Love</div></div>
+      <!-- Duplicate for seamless infinite scroll -->
+      <div class="ecard"><div class="ecard-face">😊</div><div class="ecard-lbl">Happy</div></div>
+      <div class="ecard"><div class="ecard-face">😴</div><div class="ecard-lbl">Sleepy</div></div>
+      <div class="ecard"><div class="ecard-face">🤔</div><div class="ecard-lbl">Thinking</div></div>
+      <div class="ecard"><div class="ecard-face">😎</div><div class="ecard-lbl">Cool</div></div>
+      <div class="ecard"><div class="ecard-face">🥳</div><div class="ecard-lbl">Party</div></div>
+      <div class="ecard"><div class="ecard-face">😤</div><div class="ecard-lbl">Focus</div></div>
+      <div class="ecard"><div class="ecard-face">🤩</div><div class="ecard-lbl">Excited</div></div>
+      <div class="ecard"><div class="ecard-face">😌</div><div class="ecard-lbl">Calm</div></div>
+      <div class="ecard"><div class="ecard-face">😢</div><div class="ecard-lbl">Sad</div></div>
+      <div class="ecard"><div class="ecard-face">🤓</div><div class="ecard-lbl">Nerd</div></div>
+      <div class="ecard"><div class="ecard-face">😡</div><div class="ecard-lbl">Alert</div></div>
+      <div class="ecard"><div class="ecard-face">🥹</div><div class="ecard-lbl">Love</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI DEMO -->
+<section id="ai-demo">
+  <div class="ai-wrap">
+    <div class="reveal">
+      <div class="sec-label"><i class="fas fa-robot"></i> AI Demo</div>
+      <h2 class="sec-title">Talk to your robot.<br>It actually listens.</h2>
+      <p class="sec-sub">Dopsbot's AI understands context, responds intelligently, and learns your preferences over time.</p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-chat-card reveal">
+        <div class="chat-hd">
+          <div class="chat-av"><i class="fas fa-robot"></i></div>
+          <div><div class="chat-nm">Dopsbot</div><div class="chat-st">Online</div></div>
+        </div>
+        <div class="msgs">
+          <div class="msg bot"><div class="bubble">Hey! You've been working for 90 minutes. Time for a short break?</div><div class="msg-t">10:42 AM</div></div>
+          <div class="msg usr"><div class="bubble">Yeah, set me a 5-minute break timer please!</div><div class="msg-t">10:43 AM</div></div>
+          <div class="msg bot"><div class="bubble">Done! I'll display a calming animation and alert you when time is up. Also — you have a meeting at 11:30 AM.</div><div class="msg-t">10:43 AM</div></div>
+          <div class="msg usr"><div class="bubble">Play lo-fi while I break.</div><div class="msg-t">10:44 AM</div></div>
+          <div class="msg bot"><div class="bubble">Streaming lo-fi beats now. Entering calm mode.</div><div class="msg-t">10:44 AM</div></div>
+        </div>
+        <div class="chat-inp">
+          <input type="text" placeholder="Talk to Dopsbot...">
+          <button class="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+      <div class="ai-feats reveal d2">
+        <div class="sec-label" style="margin-bottom:20px"><i class="fas fa-bolt"></i> Capabilities</div>
+        <div class="aifeat"><div class="feat-ico"><i class="fas fa-calendar-check"></i></div><div><strong>Smart Scheduling</strong> — syncs with your calendar</div></div>
+        <div class="aifeat"><div class="feat-ico"><i class="fas fa-microphone-lines"></i></div><div><strong>Voice Commands</strong> — fully hands-free control</div></div>
+        <div class="aifeat"><div class="feat-ico"><i class="fas fa-moon"></i></div><div><strong>Routine Detection</strong> — learns your daily patterns</div></div>
+        <div class="aifeat"><div class="feat-ico"><i class="fas fa-shield-halved"></i></div><div><strong>Privacy First</strong> — on-device processing</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="rev-wrap">
+    <div class="rev-hd reveal">
+      <div class="sec-label"><i class="fas fa-comments"></i> Reviews</div>
+      <h2 class="sec-title">Loved by thousands.</h2>
+      <p class="sec-sub">Real owners, real experiences. See why Dopsbot sits on 12,000+ desks worldwide.</p>
+    </div>
+    <div class="rev-grid">
+      <div class="rcard reveal">
+        <div class="rstars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="rtext">"I never expected a small robot to become my favorite work companion. The focus mode alone paid for itself in my first week."</p>
+        <div class="rauthor"><div class="rav">AK</div><div><div class="rname">Aryan Kapoor</div><div class="rrole">Product Designer, Delhi</div></div></div>
+      </div>
+      <div class="rcard reveal d1">
+        <div class="rstars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="rtext">"The expressions are insanely cute. My team always asks why my robot looks grumpy when I'm on a deadline. Best purchase of the year."</p>
+        <div class="rauthor"><div class="rav">SR</div><div><div class="rname">Shreya Rao</div><div class="rrole">Software Engineer, Bangalore</div></div></div>
+      </div>
+      <div class="rcard reveal d2">
+        <div class="rstars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="rtext">"The build quality is incredible for the price. Feels premium and solid. The AI responses are genuinely useful, not just gimmicks."</p>
+        <div class="rauthor"><div class="rav">MT</div><div><div class="rname">Mihail Tanaka</div><div class="rrole">Developer, Tokyo</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-wrap">
+    <div class="faq-hd reveal">
+      <div class="sec-label"><i class="fas fa-circle-question"></i> FAQ</div>
+      <h2 class="sec-title">Answers at a glance.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q">How does Dopsbot connect to my devices?<span class="faq-ico"><i class="fas fa-plus"></i></span></div>
+        <div class="faq-a">Dopsbot connects via Bluetooth 5.0 to your smartphone or laptop. The companion app (iOS &amp; Android) handles pairing in under 30 seconds. USB-C powers the device.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does it require an internet connection?<span class="faq-ico"><i class="fas fa-plus"></i></span></div>
+        <div class="faq-a">Core features like expressions, focus mode, clock, and games work completely offline. AI assistant features require internet for cloud model access — all personal data stays on-device.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What size is Dopsbot?<span class="faq-ico"><i class="fas fa-plus"></i></span></div>
+        <div class="faq-a">Dopsbot is 12cm tall, 8cm wide, and 7cm deep — about the size of a small coffee mug. Designed to sit beside your keyboard without taking up desk space.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is Dopsbot suitable for children?<span class="faq-ico"><i class="fas fa-plus"></i></span></div>
+        <div class="faq-a">Absolutely. Dopsbot is designed for ages 8 and up. Its rounded form and durable casing are child-safe, and parental controls in the app restrict AI and messaging features.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is the return and warranty policy?<span class="faq-ico"><i class="fas fa-plus"></i></span></div>
+        <div class="faq-a">We offer a 30-day no-questions-asked return policy and a 12-month manufacturer warranty. Free replacements are shipped within 5 business days.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">Dops<span>bot</span></div>
+        <p class="ft-desc">A smart emotional desktop robot with expressions, focus mode, games, and AI. By Dops Machine.</p>
+        <div class="soc-links">
+          <a href="#" class="soc-a"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="soc-a"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="soc-a"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="soc-a"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Product</div>
+        <ul class="ft-links">
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Expressions</a></li>
+          <li><a href="#">AI Mode</a></li>
+          <li><a href="#">Companion App</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Company</div>
+        <ul class="ft-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Support</div>
+        <ul class="ft-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Warranty</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-btm">
+      <span>2025 Dops Machine. All rights reserved.</span>
+      <span>Made with precision in India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── LOADER ──
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('loader').classList.add('hide')},1500);
+});
+
+// ── NAVBAR SCROLL ──
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>40);
+},{passive:true});
+
+// ── HAMBURGER / MOBILE MENU ──
+const mob=document.getElementById('mobileMenu');
+document.getElementById('hamburger').addEventListener('click',()=>mob.classList.add('open'));
+document.getElementById('menuClose').addEventListener('click',()=>mob.classList.remove('open'));
+function closeMob(){mob.classList.remove('open')}
+
+// ── SCROLL REVEAL (IntersectionObserver — no scroll event, very performant) ──
+const revEls=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+revEls.forEach(el=>io.observe(el));
+
+// ── FAQ ──
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const it=q.parentElement;
+    const isOpen=it.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)it.classList.add('open');
+  });
+});
+</script>
 </body>
 </html>
